@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}Criar conta · Explica Fácil{% endblock %}
+{% block content %}<div class="narrow"><p class="eyebrow">O PRIMEIRO PASSO</p><h1>Cria a tua conta de aluno<span>.</span></h1><p class="lead">Depois do registo, escolhe uma sessão no plano semanal.</p><section class="panel"><form method="post">{% csrf_token %}{{ form.as_p }}<button class="button full" type="submit">Criar conta</button></form><p class="auth-bottom">Já tens conta? <a href="{% url 'login' %}">Entrar</a></p></section></div>{% endblock %}

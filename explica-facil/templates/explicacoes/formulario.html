@@ -1,0 +1,2 @@
+{% extends 'base.html' %}
+{% block content %}<div class="narrow"><a class="back-link" href="{{ voltar }}">← Voltar</a><p class="eyebrow">ORGANIZAR AS EXPLICAÇÕES</p><h1>{{ titulo }}<span>.</span></h1><p class="lead">{{ descricao }}</p><section class="panel">{% if nota %}<p class="message">{{ nota }}</p>{% endif %}<form method="post">{% csrf_token %}{{ form.as_p }}<div class="actions"><button class="button {% if perigo %}danger{% endif %}" type="submit">{{ botao }}</button><a href="{{ voltar }}">Voltar sem guardar</a></div></form></section></div>{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Entrar · Explica Fácil{% endblock %}
+{% block content %}
+<div class="auth-layout">
+  <section class="auth-intro"><p class="eyebrow">APRENDER, UMA SEMANA DE CADA VEZ</p><h1>A tua próxima<br>conquista<br>começa aqui<span>.</span></h1><p>Organiza as tuas explicações e aprende com o apoio certo. Uma hora, até três alunos e espaço para todas as dúvidas.</p><div class="intro-tags"><span>Horários fixos</span><span>Pequenos grupos</span><span>Apoio próximo</span></div><div class="book-art" aria-hidden="true"><div class="book b1">Aa</div><div class="book b2">∑</div><div class="book b3">Hello</div><span class="art-star">✳</span></div></section>
+  <section class="auth-card"><p class="eyebrow">BEM-VINDO DE VOLTA</p><h2>Vamos aprender?</h2><p class="muted">Entra para consultar o teu plano de explicações.</p><form method="post">{% csrf_token %}{{ form.as_p }}{% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}<button class="button full" type="submit">Entrar na minha conta <span aria-hidden="true">↗</span></button></form><p class="auth-bottom">Ainda não tens conta? <a href="{% url 'registo' %}">Regista-te aqui</a></p></section>
+</div>
+{% endblock %}

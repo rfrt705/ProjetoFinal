@@ -1,0 +1,30 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Explica Fácil{% endblock %}</title>
+  <meta name="description" content="O teu plano semanal de explicações. Escolhe a disciplina, encontra uma sessão e aprende em pequenos grupos.">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+<header class="header">
+  <a class="brand" href="{% url 'plano' %}"><span class="brand-icon" aria-hidden="true">e.</span>explica<span>fácil</span></a>
+  {% if user.is_authenticated %}
+  <nav aria-label="Navegação principal">
+    <a href="{% url 'plano' %}" {% if request.resolver_match.url_name == 'plano' %}aria-current="page"{% endif %}>Plano semanal</a>
+    {% if user.papel == 'aluno' %}<a href="{% url 'minhas_inscricoes' %}">As minhas inscrições</a>{% endif %}
+    {% if user.papel == 'professor' %}<a href="{% url 'sessoes_professor' %}">As minhas sessões</a><a href="{% url 'disponibilidades' %}">Disponibilidade</a>{% endif %}
+    {% if user.administrador %}<a href="{% url 'gestao_sessoes' %}">Gerir sessões</a><a href="{% url 'admin:index' %}">Utilizadores e disciplinas</a>{% endif %}
+    <a href="{% url 'notificacoes' %}">Avisos{% if notificacoes_por_ler %}<span class="counter">{{ notificacoes_por_ler }}</span>{% endif %}</a>
+  </nav>
+  <div class="account"><span>{{ user.nome }}<small>{{ user.get_papel_display }}</small></span><form action="{% url 'logout' %}" method="post">{% csrf_token %}<button class="text-button" type="submit">Sair</button></form></div>
+  {% else %}<a class="button secondary small" href="{% url 'registo' %}">Criar conta</a>{% endif %}
+</header>
+<main id="conteudo" class="container">
+  {% if messages %}<div class="messages" role="status">{% for message in messages %}<p class="message {{ message.tags }}">{{ message }}</p>{% endfor %}</div>{% endif %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="footer"><span>Explica Fácil</span><p>Uma hora para aprender. Um passo para chegar mais longe.</p><small>Projeto de formação · Sessões com 1 a 3 alunos</small></footer>
+</body></html>
